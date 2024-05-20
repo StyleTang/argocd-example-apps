@@ -27,7 +27,7 @@ rule=$(echo "$json_output" | jq --arg app "$target_application" '
   | map(select(.applications[] == $app))
   | .[0]
 ')
-if [ -z "$rule" ]; then
+if [ -z "$rule" ] || [ "$rule" == "null" ]; then
     echo "Error: No rule found containing application '$target_application'."
     exit 1
 fi
