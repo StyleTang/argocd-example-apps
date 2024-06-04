@@ -1,0 +1,9 @@
+apiVersion: v2
+name: jay2test
+description: jay2test Application
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0"
