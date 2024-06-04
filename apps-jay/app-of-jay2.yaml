@@ -3,6 +3,8 @@ kind: ApplicationSet
 metadata:
   name: backend-app-jay2
   namespace: argocd
+  annotations:
+    jaytest: "test22"
 spec:
   generators:
     - list:
