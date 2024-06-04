@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: backend-app-jay
-  namespace: argocd
+  namespace: default
 spec:
   generators:
     - list:
@@ -17,7 +17,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: github
+        repoURL: https://github.com/StyleTang/argocd-example-apps.git
         targetRevision: master
         path: guestbook
         helm:
