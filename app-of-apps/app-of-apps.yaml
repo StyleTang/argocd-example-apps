@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: central-app-of-apps
   namespace: argocd
+  annotations:
+    jaytest: "test"
 spec:
   destination:
     namespace: argocd
