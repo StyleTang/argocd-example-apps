@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: backend-app-jay
+  namespace: default
+spec:
+  goTemplate: true
+  goTemplateOptions: [ "missingkey=error" ]
+  generators:
+    - list:
+        elements:
+          - cluster: dev
+            values:
+              service_name: "guestbook-jay"
+              service_namespace: "default"
+  template:
+    metadata:
+      name: 'guestbook-jay'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/StyleTang/argocd-example-apps.git
+        targetRevision: master
+        path: guestbook
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+  syncPolicy:
+    preserveResourcesOnDeletion: true
