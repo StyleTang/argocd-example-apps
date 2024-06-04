@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: backend-app-jay2
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: dev
+            url: https://kubernetes.default.svc
+            values:
+              service_name: "jay2test"
+              service_namespace: "default"
+  template:
+    metadata:
+      name: '{{cluster}}-backend-{{values.service_name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/StyleTang/argocd-example-apps.git
+        targetRevision: master
+        path: guestbook
+        helm:
+          releaseName: '{{values.service_name}}'
+          version: v3
+      destination:
+        server: '{{url}}'
+        namespace: '{{values.service_namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+  syncPolicy:
+    preserveResourcesOnDeletion: true
