@@ -20,9 +20,6 @@ spec:
         repoURL: https://github.com/StyleTang/argocd-example-apps.git
         targetRevision: master
         path: guestbook
-        helm:
-          releaseName: '{{values.service_name}}'
-          version: v3
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{values.service_namespace}}'
