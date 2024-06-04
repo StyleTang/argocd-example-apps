@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: backend-app-jay
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: dev
+            values:
+              service_name: "guestbook-jay"
+              service_namespace: "default"
+  template:
+    metadata:
+      name: '{{cluster}}-backend-{{values.service_name}}'
+    spec:
+      project: jay-project-01
+      source:
+        repoURL: github
+        targetRevision: master
+        path: guestbook
+        helm:
+          releaseName: '{{values.service_name}}'
+          version: v3
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{values.service_namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+  syncPolicy:
+    preserveResourcesOnDeletion: true
