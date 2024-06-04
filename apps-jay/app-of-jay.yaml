@@ -4,6 +4,8 @@ metadata:
   name: backend-app-jay
   namespace: default
 spec:
+  goTemplate: true
+  goTemplateOptions: [ "missingkey=error" ]
   generators:
     - list:
         elements:
@@ -13,7 +15,7 @@ spec:
               service_namespace: "default"
   template:
     metadata:
-      name: '{{cluster}}-backend-{{values.service_name}}'
+      name: 'guestbook-jay'
     spec:
       project: default
       source:
@@ -21,8 +23,8 @@ spec:
         targetRevision: master
         path: guestbook
       destination:
-        server: 'https://kubernetes.default.svc'
-        namespace: '{{values.service_namespace}}'
+        server: https://kubernetes.default.svc
+        namespace: default
       syncPolicy:
         automated:
           prune: true
