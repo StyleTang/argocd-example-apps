@@ -15,7 +15,7 @@ spec:
     metadata:
       name: '{{cluster}}-backend-{{values.service_name}}'
     spec:
-      project: jay-project-01
+      project: default
       source:
         repoURL: github
         targetRevision: master
