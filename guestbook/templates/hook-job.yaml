@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello-world-job-2
+  labels:
+    app.kubernetes.io/instance: dev-backend-jay2test
+  annotations:
+    argocd.argoproj.io/hook: PreSync,PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  ttlSecondsAfterFinished: 300  # Job完成后5分钟自动删除
+  template:
+    spec:
+      containers:
+        - name: hello-world
+          image: alpine
+          command: ["/bin/sh", "echo 'hello jay'"]
+      restartPolicy: Never

@@ -6,4 +6,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 data:
-  message.txt: "Hello, World!"
+  script.sh: |
+    #!/bin/sh
+    echo "Hello World"
