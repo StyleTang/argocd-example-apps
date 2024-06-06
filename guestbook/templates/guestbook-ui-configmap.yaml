@@ -4,6 +4,6 @@ metadata:
   name: hello-world-config
   namespace: default
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "2"
 data:
-  message.txt: "Hello World"
+  message.txt: "Hello World1"
