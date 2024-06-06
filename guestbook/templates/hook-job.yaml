@@ -8,11 +8,11 @@ metadata:
     argocd.argoproj.io/hook: PreSync,PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
-  ttlSecondsAfterFinished: 300  # Job完成后5分钟自动删除
+  ttlSecondsAfterFinished: 5  # Job完成后5分钟自动删除
   template:
     spec:
       containers:
         - name: hello-world
           image: alpine
-          command: ["/bin/sh", "echo 'hello jay'"]
+          command: ["echo", "jay"]
       restartPolicy: Never
