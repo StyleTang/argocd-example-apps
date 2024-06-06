@@ -3,5 +3,7 @@ kind: ConfigMap
 metadata:
   name: hello-world-config
   namespace: default
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 data:
   message.txt: "Hello World"
